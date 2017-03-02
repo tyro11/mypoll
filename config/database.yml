@@ -22,4 +22,10 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  host: localhost
+  database: postgresql
+  encoding: utf8
+  database: mypoll
+  pool: 5
+  username: eric
+  pass: blue1026
