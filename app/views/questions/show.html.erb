@@ -1,4 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<h1><%= @question.title %></h1>
+
+<%= form_for @vote do |f| %>
+<%= hidden_field :question_id, @question.id %>
+<fieldset>
+	<% @question.options.each do |option| %>
+		<div class="field">
+			<%= radio_button "option_id", option.id %><%= option.title %>
+		</div>
+	<% end %>
+</fieldset>
+<% end %>

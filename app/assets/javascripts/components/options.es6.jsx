@@ -11,16 +11,18 @@ class Options extends React.Component {
 			})
 		});
 	}
-	handleSubmit(){
+	handleSubmit(e){
 		$.ajax({
 			url: '/questions',
 			type: 'POST',
-			data: {item: {question:this.props.question,
+			data: {item: {title:this.props.question,
 							options:this.state.options}},
 			success: (response)=>{
-				console.log('it worked!', response);
+				alert('it worked!', response);
+				return false;
 			}
 		});
+		e.preventDefault();
 	}
 	handleAddOption(){
 		this.setState({
@@ -33,7 +35,7 @@ class Options extends React.Component {
 		});
 	}
 	render() {
-		return (<form className='options' onSubmit={this.handleSubmit.bind(this)}>
+		return (<form className='options' >
 				{this.state.options.map((opt,index)=>(
 					<div className='option' key={index}>
 						<input value={opt}
@@ -42,7 +44,7 @@ class Options extends React.Component {
 					</div>
 				))}
 				<button type='button' onClick={this.handleAddOption.bind(this)}>Add a new option</button>
-				<button type='submit'>Submit</button>
+				<button type='submit' onClick={this.handleSubmit.bind(this)}>Submit</button>
 			</form>
 			)
 	}
